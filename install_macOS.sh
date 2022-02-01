@@ -8,7 +8,7 @@ echo
 echo "Welcome to CodersLab!"
 echo
 echo "This script will update your operating system, install a few necessary programs"
-echo "that you will need during the course, and configure MySQL database."
+echo "that you will need during the course, and configure PostgreSQL database."
 echo "During this process, you will see many messages on your screen."
 echo "FOR THE INSTALLATION TO BE SUCCESSFUL, YOU MUST HAVE INTERNET ACCESS"
 echo "DURING THE INSTALLATION!"
@@ -23,7 +23,8 @@ xcode-select --install
 echo
 echo "Installing homebrew..."
 # install brew package manager
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo -e '\nexport PATH=/opt/homebrew/bin:$PATH\n' >> ~/.zshrc
 
 echo
 echo "Adding necessary homebrew repositories..."
@@ -36,13 +37,13 @@ echo
 echo "Installing system tools..."
 
 # install all used tools
-brew tap caskroom/cask
+# brew tap caskroom/cask
 # brew install caskroom/cask/brew-cask
 # brew install homebrew/completions/brew-cask-completion #deprecated
 
 brew install curl vim git python3 wget screen
 
-pip3 install virtualenv
+pip3 install --user virtualenv termcolor pycodestyle
 
 brew cask install java
 
@@ -70,7 +71,7 @@ brew cask install pycharm
 
 echo
 echo "Creating working directory..."
-# creating and linkng Workspace
+# creating and linking Workspace
 sudo mkdir ~/workspace
 sleep 3
 sudo chmod 777 -R ~/workspace
