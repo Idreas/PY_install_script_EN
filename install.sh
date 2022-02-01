@@ -8,7 +8,7 @@ echo
 echo "Welcome to CodersLab!"
 echo
 echo "This script will update your operating system, install a few necessary programs"
-echo "that you will need during the course, and configure MySQL database."
+echo "that you will need during the course, and configure PostgreSQL database."
 echo "During this process, you will see many messages on your screen."
 echo "FOR THE INSTALLATION TO BE SUCCESSFUL, YOU MUST HAVE INTERNET ACCESS"
 echo "DURING THE INSTALLATION!"
@@ -16,7 +16,7 @@ read -n1 -r -p "Press any key to continue."
 
 mkdir ~/.coderslab
 
-# pausing updating grub as it might triger ui
+# pausing updating grub as it might trigger ui
 sudo apt-mark hold grub*
 echo
 echo " Updating system..."
@@ -28,7 +28,8 @@ echo
 echo "Installing system tools..."
 
 # install all used tools
-sudo apt install -y curl vim git virtualenv openjdk-8-jre-headless tlp tlp-rdw
+sudo apt install -y curl vim git virtualenv openjdk-8-jre-headless tlp tlp-rdw python3-pip
+pip3 install --user pycodestyle termcolor
 preload screen
 sudo tlp start
 
@@ -39,7 +40,7 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '${PASSWORD}';"
 
 echo
 echo "Creating working directory..."
-# creating and linkng Workspace
+# creating and linking Workspace
 sudo mkdir ~/workspace
 sudo chmod 777 ~/workspace
 sudo chmod 777 -R ~/workspace
@@ -62,7 +63,7 @@ sudo apt upgrade -y
 DESKTOP=$(cat <<EOF
 [Desktop Entry]
 Name=PyCharm
-Comment=IDE używane podczas kursu w CodersLab
+Comment=IDE used during CodersLab course
 Exec=/opt/pycharm-2017.2.3/bin/pycharm.sh
 Icon=/opt/pycharm-2017.2.3/bin/pycharm.png
 Terminal=false
